@@ -1,0 +1,35 @@
+#include"Stack.cpp"
+//template class Stack<int>
+
+//template class Stack<char>
+
+int main(){
+        Stack <int>st;
+        int ch;
+        while(1){
+        cout<<"\nEnter choice\n1:Push\n2:Pop\n3:Peep\n4:Exit\n";
+        cin>>ch;
+        switch(ch){
+                case 1:
+                        int ele;
+                        cout<<"\nEnter element to be pushed\n";
+                        cin>>ele;
+                        st.push(ele);
+                        break;
+                case 2:
+                        cout<<"\nPopped element is::"<<st.pop();
+                        break;
+                case 3:
+                        cout<<"\nTop of stack is ::"<<st.peep();
+                        break;
+                case 4:
+                        exit(0);
+                        break;
+                default:
+                        cout<<"\nInvalid choice";
+                        break;
+        }
+        }
+        return 0;
+}
+

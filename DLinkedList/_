@@ -1,0 +1,138 @@
+#include"Node.cpp"
+using namespace std;
+template <class T>
+class DLinkedList{
+	private :
+		Node<T> *head;
+		Node<T> *tail;
+		int count;
+	public :
+		DLinkedList(){
+		head = nullptr;
+		tail = nullptr;
+		count = 0;
+		}
+
+		bool isNull(){
+		return(head==nullptr && tail==nullptr);
+		}
+		
+		bool isFull(){
+		return false;
+		}
+
+		void addAtBeg(T ele){
+			Node<T> *t=new Node<T>;
+			t->setData(ele);
+			t->setPrev(nullptr);
+		if(isNull()){
+		head = t;
+		tail = t;
+		}
+		else{
+		t->setNext(head);
+		head->setPrev(t);
+		head = t;
+		}
+		count++;
+		}
+		void addAtEnd(T ele){
+			 Node<T> *t=new Node<T>;
+			 t->setData(ele);
+			 t->setNext(nullptr);
+			 if(isNull()){
+			 head = t;
+			 tail = t;
+			 }
+			 else{
+			 t->setPrev(tail);
+			 tail->setNext(t);
+			 tail=t;
+			 }
+			 count++;
+		}
+		
+		T delFromBeg(){
+		if(!isNull()){
+			Node <T> *t = head;
+		if(head == tail){
+		head = nullptr;
+		tail = nullptr;
+		delete t;
+		}
+		else{
+		t=t->getNext();
+		t->setPrev(nullptr);
+		delete head;
+		head = t;
+		}
+		count--;
+		}
+		}
+		
+		T delFromEnd(){
+		Node <T> *t = new Node <T>;
+			if(!isNull()){
+		
+		if(head == tail){
+		head = nullptr;
+		tail = nullptr;
+		delete t;
+		}
+		else{
+		t = tail->getPrev();
+		t->setNext(nullptr);
+		delete tail;
+		tail = t;
+		}
+		count--;
+		}
+		}
+		T delFromPos(int pos){
+		if(!isNull()){
+			T ele;
+			Node <T> *t = head,*p=nullptr;
+			for(int i=0; i < pos-1 ; i++){
+			t = t->getNext(); 
+			}
+			ele = t->getData();
+			p=t->getNext();
+			t->getPrev()->setNext(p);
+			p->setPrev(t->getPrev());
+			delete t;
+			count--;
+			return ele;
+		}
+		}
+
+		T addAtPos(int pos, T ele){
+                if(!isNull()){
+                        Node <T> *t = head,*p=nullptr;
+                        for(int i=0; i < pos-1 ; i++ ){
+                        t = t->getNext();
+                        }
+			if(pos==1){
+			addAtBeg(ele);
+			return ele;
+			}
+                        t->setData(ele);
+			p=t->getNext();
+                        t->getPrev()->setNext(p);
+			p->setPrev(t->getPrev());			
+			delete t;
+			count++;
+                        return ele;
+                }
+                }
+
+		void display(){
+		Node <T> *t = head;
+		while(t->getNext()){
+			cout<<t->getData()<<"--->";
+			t=t->getNext();
+		}
+		cout<<"nullptr";
+		}
+
+		
+};
